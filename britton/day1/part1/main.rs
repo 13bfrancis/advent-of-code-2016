@@ -8,9 +8,9 @@ fn main() {
     let mut direction: i32 = 1;
 
     moves.into_iter().for_each(|next_move: String| {
-        let input_string: &String = &String::from_iter(next_move.chars());
-        let next_turn: String = input_string.chars().next().unwrap().to_string();
-        let num_blocks: i32 = crop_letters(input_string, 1).parse::<i32>().unwrap();
+        let next_input: &String = &String::from_iter(next_move.chars());
+        let next_turn: String = next_input.chars().next().unwrap().to_string();
+        let num_blocks: i32 = crop_letters(next_input, 1).parse::<i32>().unwrap();
         let pos_x: bool = axis == 0 && direction == 1;
         let neg_x: bool = axis == 0 && direction == -1;
         let pos_y: bool = axis == 1 && direction == 1;

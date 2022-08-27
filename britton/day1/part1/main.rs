@@ -2,13 +2,13 @@ use std::fs;
 
 fn main() {
     let input = read_file_string("input.txt").unwrap();
-    let dir_vect: Vec<String> = input.split(", ").map(str::to_string).collect();
+    let moves: Vec<String> = input.split(", ").map(str::to_string).collect();
     let mut current_coordinates: [i32; 2] = [0, 0];
     let mut axis: i32 = 1;
     let mut direction: i32 = 1;
 
-    for dir in dir_vect {
-        let input_string = &String::from_iter(dir.chars());
+    for next_move in moves {
+        let input_string = &String::from_iter(next_move.chars());
         let next_turn = input_string.chars().next().unwrap().to_string();
         let num_blocks = crop_letters(input_string, 1).parse::<i32>().unwrap();
         let is_pos_x = axis == 0 && direction == 1;

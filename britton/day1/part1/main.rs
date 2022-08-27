@@ -1,21 +1,21 @@
 use std::fs;
 
 fn main() {
-    let input_data = read_file_string("input.txt").unwrap();
+    let input_data: String = read_file_string("input.txt").unwrap();
     let moves: Vec<String> = input_data.split(", ").map(str::to_string).collect();
     let mut current_coordinates: [i32; 2] = [0, 0];
     let mut axis: i32 = 1;
     let mut direction: i32 = 1;
 
-    moves.into_iter().for_each(|next_move| {
-        let input_string = &String::from_iter(next_move.chars());
-        let next_turn = input_string.chars().next().unwrap().to_string();
-        let num_blocks = crop_letters(input_string, 1).parse::<i32>().unwrap();
-        let pos_x = axis == 0 && direction == 1;
-        let neg_x = axis == 0 && direction == -1;
-        let pos_y = axis == 1 && direction == 1;
-        let neg_y = axis == 1 && direction == -1;
-        let next_turn_right = next_turn == "R";
+    moves.into_iter().for_each(|next_move: String| {
+        let input_string: &String = &String::from_iter(next_move.chars());
+        let next_turn: String = input_string.chars().next().unwrap().to_string();
+        let num_blocks: i32 = crop_letters(input_string, 1).parse::<i32>().unwrap();
+        let pos_x: bool = axis == 0 && direction == 1;
+        let neg_x: bool = axis == 0 && direction == -1;
+        let pos_y: bool = axis == 1 && direction == 1;
+        let neg_y: bool = axis == 1 && direction == -1;
+        let next_turn_right: bool = next_turn == "R";
 
         if pos_x {
             axis = 1;
@@ -67,6 +67,6 @@ fn crop_letters(s: &str, pos: usize) -> &str {
 }
 
 fn read_file_string(filepath: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let data = fs::read_to_string(filepath)?;
+    let data: String = fs::read_to_string(filepath)?;
     Ok(data)
 }

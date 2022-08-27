@@ -19,14 +19,12 @@ fn main() {
             .to_string()
             .to_lowercase();
         let num_blocks: i32 = crop_letters(next_input, 1).parse::<i32>().unwrap();
-
-        current_axis = axis.get(&current_axis).unwrap().clone();
-
         let direction: String = cardinal_directions
             .get(&[current_axis, direction_of_change])
             .unwrap()
             .to_string();
 
+        current_axis = axis.get(&current_axis).unwrap().clone();
         direction_of_change = 1;
 
         if next_turn == "r" && (direction == "e" || direction == "s")
@@ -36,11 +34,13 @@ fn main() {
         }
         location = update_location((current_axis, num_blocks, direction_of_change, location));
     });
+
     let abs_value: i32 = location[0].abs() + location[1].abs();
     let output: String = format!(
         "# of blocks: {}\nLocation: [{},{}]",
         abs_value, location[0], location[1]
     );
+
     write_file_string("output.txt", output);
 }
 
@@ -59,7 +59,7 @@ fn crop_letters(s: &str, pos: usize) -> &str {
 }
 
 fn read_file_string(filepath: &str) -> Result<String, Box<dyn std::error::Error>> {
-    let data: String = fs::read_to_string(filepath)?;
+    let data: String = fs::read_to_string(filepath).expect("Unable to read file");
     Ok(data)
 }
 

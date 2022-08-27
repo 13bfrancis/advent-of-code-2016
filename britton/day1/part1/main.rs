@@ -32,7 +32,8 @@ fn main() {
         {
             direction_of_change = -1;
         }
-        location = update_location((current_axis, num_blocks, direction_of_change, location));
+
+        location = update_location((location, current_axis, num_blocks, direction_of_change));
     });
 
     let abs_value: i32 = location[0].abs() + location[1].abs();
@@ -45,7 +46,7 @@ fn main() {
 }
 
 fn update_location(
-    (current_axis, input_mult, direction_of_change, mut location): (i32, i32, i32, [i32; 2]),
+    (mut location, current_axis, input_mult, direction_of_change): ([i32; 2], i32, i32, i32),
 ) -> [i32; 2] {
     location[current_axis as usize] += input_mult * direction_of_change;
     return location;

@@ -23,17 +23,15 @@ fn main() {
             .get(&[current_axis, direction_of_change])
             .unwrap()
             .to_string();
+        let res = next_turn == "r" && (direction == "e" || direction == "s");
+        let lnw = next_turn == "l" && (direction == "n" || direction == "w");
 
         current_axis = axis.get(&current_axis).unwrap().clone();
         direction_of_change = 1;
 
-        let res = next_turn == "r" && (direction == "e" || direction == "s");
-        let lnw = next_turn == "l" && (direction == "n" || direction == "w");
-
         if res || lnw {
             direction_of_change = -1;
         }
-
         location = update_location((location, current_axis, num_blocks, direction_of_change));
     });
 

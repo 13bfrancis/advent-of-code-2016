@@ -28,7 +28,7 @@ fn main() {
         direction_of_change = 1;
 
         if next_turn == "r" && (direction == "e" || direction == "s")
-            || (direction == "n" || direction == "w") && !(next_turn == "r")
+            || next_turn == "l" && (direction == "n" || direction == "w")
         {
             direction_of_change = -1;
         }

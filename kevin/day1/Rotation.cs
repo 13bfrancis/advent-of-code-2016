@@ -1,5 +1,7 @@
-public enum Rotation
+public class Location
 {
-    Left,
-    Right
+    public int xcord { get; set; }
+    public int ycord { get; set; }
+    public Direction CurrentDirection { get; set; }
+    public bool VisitedTwice { get; set; }
 }

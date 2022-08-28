@@ -27,9 +27,10 @@ fn main() {
         current_axis = axis.get(&current_axis).unwrap().clone();
         direction_of_change = 1;
 
-        if (next_turn == "r" && (direction == "e" || direction == "s"))
-            || (next_turn == "l" && (direction == "n" || direction == "w"))
-        {
+        let res = next_turn == "r" && (direction == "e" || direction == "s");
+        let lnw = next_turn == "l" && (direction == "n" || direction == "w");
+
+        if res || lnw {
             direction_of_change = -1;
         }
 

@@ -40,7 +40,6 @@ fn main() {
         "# of blocks: {}\nLocation: [{},{}]",
         abs_value, location[0], location[1]
     );
-
     write_file_string("output.txt", output);
 }
 

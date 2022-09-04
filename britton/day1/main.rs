@@ -13,8 +13,7 @@ struct Location {
 }
 
 fn main() {
-    let mapped_moves: Vec<Move> = get_moves();
-    let visited_locations = make_moves(mapped_moves);
+    let visited_locations = make_moves(get_moves());
     println!("{:?}", visited_locations.last().unwrap());
 }
 

@@ -1,6 +1,6 @@
-const fs = require("fs");
+import { readFile } from "fs";
 
-fs.readFile("input.txt", "utf8", (_err, data) => {
+readFile("input.txt", "utf8", (_err, data) => {
     let x = 0;
     let y = 0;
     let directions = [{ x: 0, y: 1 }, { x: 1, y: 0 }, { x: 0, y: -1 }, { x: -1, y: 0 }];
@@ -24,13 +24,13 @@ fs.readFile("input.txt", "utf8", (_err, data) => {
         for (let i = 1; i <= Math.abs(xMove); i++) {
             x += Math.sign(xMove);
 
-            firstCrossedPath = firstCrossedPath ?? checkLocations(locations, x, y);
+            firstCrossedPath ??= checkLocations(locations, x, y);
         }
 
         for (let i = 1; i <= Math.abs(yMove); i++) {
             y += Math.sign(yMove);
 
-            firstCrossedPath = firstCrossedPath ?? checkLocations(locations, x, y);
+            firstCrossedPath ??=  checkLocations(locations, x, y);
         }
     }
 

@@ -20,6 +20,7 @@ fn main() {
     let mut current_axis: i32 = 1;
     let mut direction_of_change: i32 = 1;
     let mut visited_locations: Vec<Location> = Vec::new();
+    let mut first_hit: bool = true;
 
     let mapped_moves: Vec<Move> = get_moves();
 
@@ -39,29 +40,26 @@ fn main() {
         }
 
         let num_blocks: i32 = next_move.blocks * direction_of_change;
-        let vals = parse_move(current_location, current_axis, num_blocks);
+        let vals: (Vec<Location>, Location) =
+            parse_move(current_location, current_axis, num_blocks);
         let next_locations: Vec<Location> = vals.0;
 
-        let cur_loc = vals.1;
+        let cur_loc: Location = vals.1;
         current_location = cur_loc;
         next_locations.into_iter().for_each(|location: Location| {
+            if visited_locations.contains(&location) && first_hit == true {
+                println!("{:?}", location);
+                first_hit = false;
+            }
             visited_locations.push(location.clone());
         });
-        // current_location = next_locations.last().unwrap().clone();
     });
-    println!("{:?}", visited_locations);
-}
-
-fn update_location(
-    (mut location, current_axis, input_mult, direction_of_change): ([i32; 2], i32, i32, i32),
-) -> [i32; 2] {
-    location[current_axis as usize] += input_mult * direction_of_change;
-    return location;
+    println!("{:?}", visited_locations.last().unwrap());
 }
 
 fn crop_letters(s: &str, pos: usize) -> &str {
     match s.char_indices().skip(pos).next() {
-        Some((posL, _)) => &s[pos..],
+        Some((pos, _)) => &s[pos..],
         None => "",
     }
 }
@@ -69,10 +67,6 @@ fn crop_letters(s: &str, pos: usize) -> &str {
 fn read_file_string(filepath: &str) -> Result<String, Box<dyn std::error::Error>> {
     let data: String = fs::read_to_string(filepath).expect("Unable to read file");
     Ok(data)
-}
-
-fn write_file_string(filepath: &str, data: String) {
-    fs::write(filepath, data).expect("Unable to write file");
 }
 
 fn parse_move(
@@ -84,22 +78,19 @@ fn parse_move(
     let counter: i32 = num_blocks.abs() + 1;
     let x: i32 = current_location.x.clone();
     let y: i32 = current_location.y.clone();
-    //let mut next_location: Location = Location { x: (0), y: (0) };
 
     let mut next_location: Location = Location {
         x: (current_location.x),
         y: (current_location.y),
     };
-    let mut new_x = 0;
-    let mut new_y = 0;
 
-    for i in 1..counter {
+    for _i in 1..counter {
         if current_axis == 0 {
-            new_x = next_location.x + (num_blocks.abs() / num_blocks);
+            let new_x: i32 = next_location.x + (num_blocks.abs() / num_blocks);
             next_location = Location { x: (new_x), y: (y) };
             locations.push(next_location);
         } else if current_axis == 1 {
-            let new_y = next_location.y + (num_blocks.abs() / num_blocks);
+            let new_y: i32 = next_location.y + (num_blocks.abs() / num_blocks);
             next_location = Location { x: (x), y: (new_y) };
             locations.push(next_location);
         }
@@ -126,9 +117,7 @@ fn get_moves() -> Vec<Move> {
             direction: next_turn,
             blocks: num_blocks,
         };
-
         mapped_moves.push(current_move);
     });
-
     return mapped_moves;
 }

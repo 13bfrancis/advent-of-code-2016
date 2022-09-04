@@ -8,10 +8,12 @@ import (
 )
 
 type gps struct {
-	direction string
-	x         int
-	y         int
-	meta      moveMeta
+	direction            string
+	x                    int
+	y                    int
+	meta                 moveMeta
+	visitedLocs          map[string]int
+	firstLocVisitedTwice string
 }
 
 type moveMeta struct {
@@ -28,9 +30,11 @@ var directionMap = map[int]string{
 func main() {
 	moves := fileToCode("inputs.txt")
 	gps := gps{
-		direction: "north",
-		x:         0,
-		y:         0,
+		direction:            "north",
+		x:                    0,
+		y:                    0,
+		visitedLocs:          map[string]int{},
+		firstLocVisitedTwice: "",
 		meta: moveMeta{
 			dirLookup: 0,
 		},
@@ -43,7 +47,8 @@ func main() {
 		gps.moveNTimes(numOfMoves)
 	}
 
-	fmt.Println(gps.calculateDistance())
+	fmt.Println("the distance from the start is", calculateDistance(gps.x, gps.y), "spaces away")
+	fmt.Println("(", gps.firstLocVisitedTwice, ") is the first location visited twice and is", calculateDistance(keyToCoords(gps.firstLocVisitedTwice)), "spaces away")
 }
 
 func fileToCode(fileName string) []string {
@@ -77,19 +82,36 @@ func (g *gps) setDirBasedOnMove(moveDir string) {
 }
 
 func (g *gps) moveNTimes(n int) {
-	if g.direction == "north" {
-		g.y += n
-	} else if g.direction == "south" {
-		g.y -= n
-	} else if g.direction == "east" {
-		g.x += n
-	} else if g.direction == "west" {
-		g.x -= n
+	for i := 0; i < n; i++ {
+		if g.direction == "north" {
+			g.addVisitedLocation()
+			g.y++
+		} else if g.direction == "south" {
+			g.addVisitedLocation()
+			g.y--
+		} else if g.direction == "east" {
+			g.addVisitedLocation()
+			g.x++
+		} else if g.direction == "west" {
+			g.addVisitedLocation()
+			g.x--
+		}
 	}
 }
 
-func (g *gps) calculateDistance() int {
-	return Abs(g.x) + Abs(g.y)
+func (g *gps) addVisitedLocation() {
+	locKey := fmt.Sprint(g.x, ",", g.y)
+
+	g.visitedLocs[locKey]++
+
+	if g.firstLocVisitedTwice == "" && g.visitedLocs[locKey] > 1 {
+		g.firstLocVisitedTwice = locKey
+	}
+}
+
+// get distance from start (this assumes start is at 0,0)
+func calculateDistance(x, y int) int {
+	return Abs(x) + Abs(y)
 }
 
 // absolute value function
@@ -99,4 +121,12 @@ func Abs(num int) int {
 	}
 
 	return num
+}
+
+// convert key to x,y coords
+func keyToCoords(locKey string) (int, int) {
+	arr := strings.Split(locKey, ",")
+	x, _ := strconv.Atoi(arr[0])
+	y, _ := strconv.Atoi(arr[1])
+	return x, y
 }

@@ -44,8 +44,7 @@ fn main() {
             parse_move(current_location, current_axis, num_blocks);
         let next_locations: Vec<Location> = vals.0;
 
-        let cur_loc: Location = vals.1;
-        current_location = cur_loc;
+        current_location = vals.1;
         next_locations.into_iter().for_each(|location: Location| {
             if visited_locations.contains(&location) && first_hit == true {
                 println!("{:?}", location);

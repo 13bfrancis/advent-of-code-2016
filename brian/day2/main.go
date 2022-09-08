@@ -7,9 +7,8 @@ import (
 )
 
 type keypad struct {
-	keys             [][]string
-	lastPressedIndex location
-	currentLocation  location
+	keys            [][]string
+	currentLocation location
 }
 
 type location struct {
@@ -18,17 +17,31 @@ type location struct {
 }
 
 func main() {
-	kp := keypad{
+	kp1 := keypad{
 		keys: [][]string{
 			{"1", "2", "3"},
 			{"4", "5", "6"},
 			{"7", "8", "9"},
 		},
-		currentLocation:  location{1, 1},
-		lastPressedIndex: location{1, 1},
+		currentLocation: location{1, 1},
 	}
 
-	fmt.Println(kp)
+	kp2 := keypad{
+		keys: [][]string{
+			{"_", "_", "1", "_", "_"},
+			{"_", "2", "3", "4", "_"},
+			{"5", "6", "7", "8", "9"},
+			{"_", "A", "B", "C", "_"},
+			{"_", "_", "D", "_", "_"},
+		},
+		currentLocation: location{2, 0},
+	}
+
+	moves := convertInputsToCode()
+	fmt.Println("part 1")
+	navigateBoard(kp1, moves)
+	fmt.Println("part 2")
+	navigateBoard(kp2, moves)
 }
 
 func (kp *keypad) moveUp() {
@@ -59,6 +72,10 @@ func (kp *keypad) setNewLocation(row int, col int) {
 	kp.currentLocation = location{row, col}
 }
 
+func (kp *keypad) pressButton(row int, col int) {
+	fmt.Println(kp.keys[row][col])
+}
+
 func (kp *keypad) isValidMove(row int, col int) bool {
 	newRowIndex := row + kp.currentLocation.row
 	newColIndex := col + kp.currentLocation.col
@@ -75,7 +92,29 @@ func (kp *keypad) isValidMove(row int, col int) bool {
 		return false
 	}
 
+	if kp.keys[newRowIndex][newColIndex] == "_" {
+		return false
+	}
+
 	return true
+}
+
+func navigateBoard(kp keypad, moves []string) {
+	for _, move := range moves {
+		for _, direction := range move {
+			strDir := string(direction)
+			if strDir == "R" {
+				kp.moveRight()
+			} else if strDir == "L" {
+				kp.moveLeft()
+			} else if strDir == "U" {
+				kp.moveUp()
+			} else if strDir == "D" {
+				kp.moveDown()
+			}
+		}
+		kp.pressButton(kp.currentLocation.row, kp.currentLocation.col)
+	}
 }
 
 func convertInputsToCode() []string {

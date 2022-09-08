@@ -100,18 +100,17 @@ func (kp *keypad) isValidMove(row int, col int) bool {
 }
 
 func navigateBoard(kp keypad, moves []string) {
+	moveMap := map[string]func(){
+		"U": kp.moveUp,
+		"D": kp.moveDown,
+		"L": kp.moveLeft,
+		"R": kp.moveRight,
+	}
+
 	for _, move := range moves {
 		for _, direction := range move {
 			strDir := string(direction)
-			if strDir == "R" {
-				kp.moveRight()
-			} else if strDir == "L" {
-				kp.moveLeft()
-			} else if strDir == "U" {
-				kp.moveUp()
-			} else if strDir == "D" {
-				kp.moveDown()
-			}
+			moveMap[strDir]()
 		}
 		kp.pressButton(kp.currentLocation.row, kp.currentLocation.col)
 	}

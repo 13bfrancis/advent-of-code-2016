@@ -92,11 +92,7 @@ func (kp *keypad) isValidMove(row int, col int) bool {
 		return false
 	}
 
-	if kp.keys[newRowIndex][newColIndex] == "_" {
-		return false
-	}
-
-	return true
+	return kp.keys[newRowIndex][newColIndex] != "_"
 }
 
 func navigateBoard(kp keypad, moves []string) {

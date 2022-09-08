@@ -10,7 +10,7 @@ fn main() {
         ["-", "A", "B", "C", "-"],
         ["-", "-", "D", "-", "-"],
     ];
-    
+
     let mut x: usize = 0;
     let mut y: usize = 2;
     let mut code: Vec<&str> = Vec::new();
@@ -18,10 +18,10 @@ fn main() {
 
     directions.for_each(|line: &str| {
         line.chars().for_each(|c: char| {
-            let mut is_button = false;
+            let mut is_button: bool = false;
 
             if c == 'L' {
-                let mut new_x = x;
+                let mut new_x: usize = x;
                 if x > 0 {
                     new_x = x - 1;
                     is_button = num_pad[y][new_x] != "-";
@@ -41,7 +41,7 @@ fn main() {
                     x = new_x;
                 }
             } else if c == 'U' {
-                let mut new_y = y;
+                let mut new_y: usize = y;
                 if y > 0 {
                     new_y = y - 1;
                     is_button = num_pad[new_y][x] != "-";

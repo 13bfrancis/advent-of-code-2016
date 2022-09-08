@@ -3,6 +3,9 @@ use std::fs;
 fn main() {
     let input: String = read_file_string("input.txt").unwrap();
     let directions: std::str::Split<&str> = input.split("\n");
+    let mut x: usize = 0;
+    let mut y: usize = 2;
+    let mut code: Vec<char> = Vec::new();
     let num_pad: Vec<[char; 5]> = vec![
         ['-', '-', '1', '-', '-'],
         ['-', '2', '3', '4', '-'],
@@ -10,10 +13,6 @@ fn main() {
         ['-', 'A', 'B', 'C', '-'],
         ['-', '-', 'D', '-', '-'],
     ];
-
-    let mut x: usize = 0;
-    let mut y: usize = 2;
-    let mut code: Vec<char> = Vec::new();
     let mut position: char = num_pad[y][x];
 
     directions.for_each(|line: &str| {

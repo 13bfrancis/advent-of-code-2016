@@ -105,8 +105,7 @@ func navigateBoard(kp keypad, moves []string) {
 
 	for _, move := range moves {
 		for _, direction := range move {
-			strDir := string(direction)
-			moveMap[strDir]()
+			moveMap[string(direction)]()
 		}
 		kp.pressButton(kp.currentLocation.row, kp.currentLocation.col)
 	}

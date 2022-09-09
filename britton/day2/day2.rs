@@ -5,6 +5,8 @@ fn main() {
     let directions: std::str::Split<&str> = input.split("\n");
     let mut x: usize = 0;
     let mut y: usize = 2;
+    let mut new_x: usize = 0;
+    let mut new_y: usize = 0;
     let mut code: Vec<char> = Vec::new();
     // let num_pad: Vec<[char; 5]> = vec![
     // ['-', '-', '-', '-', '-'],
@@ -27,7 +29,7 @@ fn main() {
             let is_button: bool;
 
             if c == 'L' && x > 0 {
-                let new_x: usize = x - 1;
+                new_x = x - 1;
                 is_button = num_pad[y][new_x] != '-';
 
                 if is_button {
@@ -35,7 +37,7 @@ fn main() {
                     x = new_x;
                 }
             } else if c == 'R' && x <= 3 {
-                let new_x: usize = x + 1;
+                new_x = x + 1;
                 is_button = num_pad[y][new_x] != '-';
 
                 if is_button {
@@ -43,7 +45,7 @@ fn main() {
                     x = new_x;
                 }
             } else if c == 'U' && y > 0 {
-                let new_y: usize = y - 1;
+                new_y = y - 1;
                 is_button = num_pad[new_y][x] != '-';
 
                 if is_button {
@@ -51,7 +53,7 @@ fn main() {
                     y = new_y;
                 }
             } else if c == 'D' && y <= 3 {
-                let new_y: usize = y + 1;
+                new_y = y + 1;
                 is_button = num_pad[new_y][x] != '-';
 
                 if is_button {

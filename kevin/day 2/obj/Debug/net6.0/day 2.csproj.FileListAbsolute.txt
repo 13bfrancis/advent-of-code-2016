@@ -1,0 +1,15 @@
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/bin/Debug/net6.0/day 2
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/bin/Debug/net6.0/day 2.deps.json
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/bin/Debug/net6.0/day 2.runtimeconfig.json
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/bin/Debug/net6.0/day 2.dll
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/bin/Debug/net6.0/day 2.pdb
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.csproj.AssemblyReference.cache
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.GeneratedMSBuildEditorConfig.editorconfig
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.AssemblyInfoInputs.cache
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.AssemblyInfo.cs
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.csproj.CoreCompileInputs.cache
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.dll
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/refint/day 2.dll
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.pdb
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/day 2.genruntimeconfig.cache
+/Users/kinnes/Desktop/Projects/advent-of-code-2016/kevin/day 2/obj/Debug/net6.0/ref/day 2.dll

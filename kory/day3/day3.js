@@ -14,20 +14,20 @@ readFile('input.txt', "utf8", (_err, data) => {
     let Triangles_Part2 = data.matchAll(/(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)\D+(\d+)/g);
     let TotalTriangles_Part2 = 0;
 
-    for (const x of Triangles_Part2) {
-        let a1 = parseInt(x[1]);
-        let b1 = parseInt(x[4]);
-        let c1 = parseInt(x[7]);
+    for (const side of Triangles_Part2) {
+        let a1 = parseInt(side[1]);
+        let b1 = parseInt(side[4]);
+        let c1 = parseInt(side[7]);
         TotalTriangles_Part2 += isValidTriangle(a1, b1, c1) ? 1 : 0;
 
-        let a2 = parseInt(x[2]);
-        let b2 = parseInt(x[5]);
-        let c2 = parseInt(x[8]);
+        let a2 = parseInt(side[2]);
+        let b2 = parseInt(side[5]);
+        let c2 = parseInt(side[8]);
         TotalTriangles_Part2 += isValidTriangle(a2, b2, c2) ? 1 : 0;
 
-        let a3 = parseInt(x[3]);
-        let b3 = parseInt(x[6]);
-        let c3 = parseInt(x[9]);
+        let a3 = parseInt(side[3]);
+        let b3 = parseInt(side[6]);
+        let c3 = parseInt(side[9]);
         TotalTriangles_Part2 += isValidTriangle(a3, b3, c3) ? 1 : 0;
     }
 

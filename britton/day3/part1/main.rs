@@ -4,7 +4,6 @@ use std::str::FromStr;
 fn main() {
     let input: String = read_file_string("input.txt").unwrap();
     let triangles: std::str::Split<&str> = input.split("\n");
-
     let mut valid_triangles: i32 = 0;
 
     triangles.for_each(|mut triangle: &str| {
